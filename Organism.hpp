@@ -16,5 +16,7 @@ protected:
 public:
     Organism();
     Organism(int x, int y, int strength, int initiative, int age, char* symbol, World& world);
-
+    virtual void action() = 0;
+    virtual void collision(Organism* org) = 0;
+    virtual void draw();
 };

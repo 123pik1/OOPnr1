@@ -25,3 +25,8 @@ Organism::Organism(int x, int y, int strength, int initiative, int age, char sym
     strcpy(this->symbol, symbol); 
     this->world = world;
 }
+
+void Organism::draw()
+{
+    mvaddch(y, x, symbol[0]);
+}
