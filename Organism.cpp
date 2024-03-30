@@ -7,15 +7,11 @@ Organism::Organism()
     strength = 0;
     initiative = 0;
     age = 0;
-    symbol[0] = ' ';
-    symbol[1] = ' ';
-    symbol[2] = ' ';
-    symbol[3] = ' ';
-    symbol[4] = ' ';
+    symbol[0] = '\0';
 }
 
 
-Organism::Organism(int x, int y, int strength, int initiative, char symbol[], World& world)
+Organism::Organism(int x, int y, int strength, int initiative, char symbol[], orgTypes type, World& world)
 {
     this->x = x;
     this->y = y;
@@ -24,6 +20,7 @@ Organism::Organism(int x, int y, int strength, int initiative, char symbol[], Wo
     this->age =0;
     strcpy(this->symbol, symbol); 
     this->world = world;
+    this->type = type;
 }
 
 void Organism::draw()

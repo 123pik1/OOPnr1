@@ -13,10 +13,13 @@ private:
     int height;
     vector<Organism*> organisms;
     bool* map =(bool*) calloc(witdh*height, sizeof(bool));
+    void drawWorld();
+    bool actTurn();
 public:
     World() {}
     World(int witdh, int height): witdh(witdh), height(height) {}
     void mainloop();
     void addOrganism(Organism* organism);
+    bool isOccupied(int x, int y);
     ~World();
 };
