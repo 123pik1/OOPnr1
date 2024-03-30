@@ -21,5 +21,6 @@ public:
     void mainloop();
     void addOrganism(Organism* organism);
     bool isOccupied(int x, int y);
+    void removeOrganism(Organism* organism);
     ~World();
 };

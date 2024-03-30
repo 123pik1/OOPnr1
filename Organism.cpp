@@ -27,3 +27,18 @@ void Organism::draw()
 {
     mvaddch(y, x, symbol[0]);
 }
+
+int Organism::getStrength()
+{
+    return strength;
+}
+
+void Organism::setStrength(int strength)
+{
+    this->strength = strength;
+}
+
+void Organism::die()
+{
+    world.removeOrganism(this);
+}

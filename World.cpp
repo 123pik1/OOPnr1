@@ -59,3 +59,15 @@ bool World::isOccupied(int x, int y)
 {
     return map[x + y * witdh];
 }
+
+void World::removeOrganism(Organism* organism)
+{
+    for (int i = 0; i < organisms.size(); i++)
+    {
+        if (organisms[i] == organism)
+        {
+            organisms.erase(organisms.begin() + i);
+            break;
+        }
+    }
+}
