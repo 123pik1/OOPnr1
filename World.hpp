@@ -3,7 +3,7 @@
 
 
 
-class Word
+class World
 {
 
 };
