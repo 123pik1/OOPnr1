@@ -15,13 +15,13 @@ Organism::Organism()
 }
 
 
-Organism::Organism(int x, int y, int strength, int initiative, int age, char symbol[], World& world)
+Organism::Organism(int x, int y, int strength, int initiative, char symbol[], World& world)
 {
     this->x = x;
     this->y = y;
     this->strength = strength;
     this->initiative = initiative;
-    this->age = age;
+    this->age =0;
     strcpy(this->symbol, symbol); 
     this->world = world;
 }

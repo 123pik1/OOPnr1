@@ -5,5 +5,5 @@ class Plant : public Organism
 
     public:
         Plant(int x, int y, int strength, char* symbol, World& world);
-
+        virtual void action();
 };
