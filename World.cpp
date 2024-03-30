@@ -1,9 +1,22 @@
 #include "World.hpp"
 #include "Organism.hpp"
 
+World::World(int witdh, int height)
+{
+    this->witdh = witdh;
+    this->height = height;
+    map=(bool*) calloc(witdh*height, sizeof(bool));
+    for (int i = 0; i < witdh * height; i++)
+    {
+        map[i] = false;
+    }
+}
+
 void World::mainloop()
 {
+    initscr();
     while (actTurn());
+    endwin();
 }
 
 bool World::actTurn()
@@ -22,7 +35,10 @@ void World::drawWorld()
     {
         organisms[i]->draw();
     }
+    refresh();
 }
+
+
 
 void World::addOrganism(Organism* organism)
 {
