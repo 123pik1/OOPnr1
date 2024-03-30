@@ -16,5 +16,6 @@ private:
 public:
     World() {}
     World(int witdh, int height): witdh(witdh), height(height) {}
+    void mainloop();
     void addOrganism(Organism* organism);
 };
