@@ -1,6 +1,6 @@
 #include "Plant.hpp"
 
-Plant::Plant(int x, int y, int strength, char* symbol,orgTypes type, World& world) : Organism(x, y, strength, 0, symbol,type, world)
+Plant::Plant(int x, int y, int strength, char* symbol,plantTypes type, World& world) : Organism(x, y, strength, 0, symbol,PLANT, world)
 {
     
 }
@@ -45,4 +45,9 @@ void Plant::action()
             break;
         }
     }
+}
+
+void Plant::collision(Organism* org)
+{
+    this->die();
 }

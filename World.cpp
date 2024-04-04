@@ -71,3 +71,15 @@ void World::removeOrganism(Organism* organism)
         }
     }
 }
+
+Organism* World::getOrganism(int x, int y)
+{
+    for (int i = 0; i < organisms.size(); i++)
+    {
+        if (organisms[i]->getX() == x && organisms[i]->getY() == y)
+        {
+            return organisms[i];
+        }
+    }
+    return NULL;
+}

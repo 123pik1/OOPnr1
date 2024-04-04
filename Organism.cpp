@@ -11,7 +11,7 @@ Organism::Organism()
 }
 
 
-Organism::Organism(int x, int y, int strength, int initiative, char symbol[], orgTypes type, World& world)
+Organism::Organism(int x, int y, int strength, int initiative, char* symbol, orgType type, World& world)
 {
     this->x = x;
     this->y = y;
@@ -41,4 +41,12 @@ void Organism::setStrength(int strength)
 void Organism::die()
 {
     world.removeOrganism(this);
+}
+int Organism::getX()
+{
+    return x;
+}
+int Organism::getY()
+{
+    return y;
 }

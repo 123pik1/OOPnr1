@@ -7,7 +7,7 @@
 class Organism
 {
 protected:
-    typedef int orgType;
+    
     int x, y;
     int strength;
     int initiative;
@@ -18,8 +18,11 @@ protected:
 
 public:
     Organism();
-    Organism(int x, int y, int strength, int initiative, char *symbol, orgTypes type, World &world);
+    Organism(int x, int y, int strength, int initiative, char *symbol, orgType type, World &world);
     int getStrength();
+    int getX();
+    int getY();
+    orgType getType();
     void setStrength(int strength);
     virtual void action() = 0;
     virtual void collision(Organism *org) = 0;
