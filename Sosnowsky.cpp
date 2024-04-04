@@ -17,7 +17,7 @@ void Sosnowsky::action()
         Organism* org = world.getOrganism(x, y + 1);
         if (org->getType() == ANIMAL)
         {
-            if (org->getSpecies()!=CYBER_SHEEP)
+            if (org->getAnSpecies()!=CYBER_SHEEP)
                 org->die();
         }
         

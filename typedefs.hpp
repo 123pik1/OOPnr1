@@ -4,7 +4,8 @@ enum
     SONCHUS = 'M',
     GUARANA = 'U',
     BELLADONNA = 'B',
-    SOSNOWSKY_HOGWEED = 'S'
+    SOSNOWSKY_HOGWEED = 'S',
+    NO_PLANT = ' '
 }typedef plantTypes; 
 
 enum 
@@ -14,7 +15,9 @@ enum
     SHEEP = 'S',
     FOX = 'F',
     TURTLE = 'T',
-    ANTELOPE = 'A'
+    ANTELOPE = 'A',
+    CYBER_SHEEP = 'C',
+    NO_ANIMAL = ' '
 } typedef animalTypes;
 
 enum 

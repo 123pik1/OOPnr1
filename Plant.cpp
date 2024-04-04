@@ -1,6 +1,6 @@
 #include "Plant.hpp"
 
-Plant::Plant(int x, int y, int strength, char* symbol,plantTypes type, World& world) : Organism(x, y, strength, 0, symbol,PLANT, world)
+Plant::Plant(int x, int y, int strength, char* symbol,plantTypes type, World& world) : Organism(x, y, strength, 0, symbol, world, type)
 {
     
 }
