@@ -83,3 +83,18 @@ Organism* World::getOrganism(int x, int y)
     }
     return NULL;
 }
+
+
+void World::readMap()
+{
+    // std::ifstream i("world.json");
+    // json j;
+    // i >> j;
+    // for (json& organism : j)
+    // {
+    //     std::string type = organism["type"];
+    //     auto species = organism["species"];
+    //     printf("%s\n", type.c_str());
+    //     std::cout << species << std::endl;
+    // }
+}

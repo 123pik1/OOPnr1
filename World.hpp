@@ -1,6 +1,10 @@
 #pragma once
 #include <ncurses.h>
+// #include <nlohmann/json.hpp>
+#include <iostream>
 #include <bits/stdc++.h>
+#include <fstream>
+// using json = nlohmann::json;
 
 using namespace std;
 
@@ -23,5 +27,6 @@ public:
     bool isOccupied(int x, int y);
     void removeOrganism(Organism* organism);
     Organism* getOrganism(int x, int y);
+    void readMap();
     ~World();
 };

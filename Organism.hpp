@@ -35,6 +35,6 @@ public:
     void setStrength(int strength);
     virtual void action() = 0;
     virtual void collision(Organism *org) = 0;
-    virtual void draw();
+    void draw();
     void die();
 };
