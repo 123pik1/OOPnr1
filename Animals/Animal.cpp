@@ -6,13 +6,15 @@ Animal::Animal(int x, int y, int strength, int initiative, char *symbol, World &
 
 void Animal::action()
 {
-
+    prevX = x;
+    prevY = y;
+    move();
+    age++;
 }
 
-void Animal::move(int dist)
+void Animal::moving(int dist, int direction)
 {
-    int direction = rand() % 4;
-    switch (direction)
+     switch (direction)
     {
     case 0:
         if (!world.isOccupied(x, y-dist))
@@ -58,6 +60,14 @@ void Animal::move(int dist)
         break;
     }
 }
+
+
+void Animal::move()
+{
+    int dist=1;
+    int direction = rand() % 4;
+    moving(dist, direction);
+}
 void Animal::fight(Organism *org)
 {
     if (this->getStrength() > org->getStrength())
@@ -76,11 +86,11 @@ void Animal::anCollision(Animal *org)
         int x = rand() % 2;
         if (x == 0)
         {
-            this->move(1);
+            this->move();
         }
         else
         {
-            org->move(1);
+            org->move();
         }
     }
     else
@@ -98,4 +108,10 @@ void Animal::collision(Organism *org)
     {
         org->collision(this);
     }
+}
+
+void Animal::returnPosition()
+{
+    x = prevX;
+    y = prevY;
 }
