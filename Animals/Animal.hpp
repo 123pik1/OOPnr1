@@ -15,5 +15,6 @@ class Animal : public Organism
         virtual void fight(Organism *org);
         virtual void anCollision(Animal *org);
         virtual void moving(int dist, int direction);
-        
+        virtual Animal* newAnimal(int x, int y)=0;
+
 };

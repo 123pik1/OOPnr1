@@ -50,5 +50,10 @@ void Human::move()
 void Human::useAbility()
 {
     strength=10;
+    abilityCooldown=5;
 }
 
+Animal* Human::newAnimal(int x, int y)
+{
+    return new Human(x, y, world);
+}

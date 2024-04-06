@@ -11,4 +11,5 @@ class Human:public Animal
         void useAbility();
         void abilityRegen();
         void move();
+        Animal* newAnimal(int x, int y);
 };

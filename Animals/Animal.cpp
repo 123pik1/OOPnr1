@@ -14,46 +14,46 @@ void Animal::action()
 
 void Animal::moving(int dist, int direction)
 {
-     switch (direction)
+    switch (direction)
     {
     case 0:
-        if (!world.isOccupied(x, y-dist))
+        if (!world.isOccupied(x, y - dist))
         {
             this->y -= dist;
-        }  
-        else 
+        }
+        else
         {
-            this->collision(world.getOrganism(x, y-dist));
+            this->collision(world.getOrganism(x, y - dist));
         }
         break;
     case 1:
-        if (!world.isOccupied(x, y+dist))
+        if (!world.isOccupied(x, y + dist))
         {
             this->y += dist;
-        }  
-        else 
+        }
+        else
         {
-            this->collision(world.getOrganism(x, y+dist));
+            this->collision(world.getOrganism(x, y + dist));
         }
         break;
     case 2:
-        if (!world.isOccupied(x-dist, y))
+        if (!world.isOccupied(x - dist, y))
         {
             this->x -= dist;
-        }  
-        else 
+        }
+        else
         {
-            this->collision(world.getOrganism(x-dist, y));
+            this->collision(world.getOrganism(x - dist, y));
         }
         break;
     case 3:
-        if (!world.isOccupied(x+dist, y))
+        if (!world.isOccupied(x + dist, y))
         {
             this->x += dist;
-        }  
-        else 
+        }
+        else
         {
-            this->collision(world.getOrganism(x+dist, y));
+            this->collision(world.getOrganism(x + dist, y));
         }
         break;
     default:
@@ -61,36 +61,65 @@ void Animal::moving(int dist, int direction)
     }
 }
 
-
 void Animal::move()
 {
-    int dist=1;
+    int dist = 1;
     int direction = rand() % 4;
     moving(dist, direction);
 }
 void Animal::fight(Organism *org)
 {
     if (this->getStrength() > org->getStrength())
-        {
-            org->die();
-        }
-        else
-        {
-            this->die();
-        }
+    {
+        org->die();
+    }
+    else
+    {
+        this->die();
+    }
 }
+
 void Animal::anCollision(Animal *org)
 {
-    if (anSpecies==org->getAnSpecies())
+    if (anSpecies == org->getAnSpecies())
     {
-        int x = rand() % 2;
-        if (x == 0)
+        int i = 0;
+        if (world.isOccupied(x, y + 1) == false)
         {
-            this->move();
+            i++;
         }
-        else
+        if (world.isOccupied(x, y - 1) == false)
         {
-            org->move();
+            i++;
+        }
+        if (world.isOccupied(x + 1, y) == false)
+        {
+            i++;
+        }
+        if (world.isOccupied(x - 1, y) == false)
+        {
+            i++;
+        }
+        if (i != 0)
+        {
+            int option = (rand() % i) + 1;
+            switch (option)
+            {
+            case 1:
+                world.addOrganism(newAnimal(x, y + 1));
+                break;
+            case 2:
+                world.addOrganism(newAnimal(x + 1, y));
+                break;
+            case 3:
+                world.addOrganism(newAnimal(x, y - 1));
+                break;
+            case 4:
+                world.addOrganism(newAnimal(x - 1, y));
+                break;
+            default:
+                break;
+            }
         }
     }
     else
@@ -102,7 +131,7 @@ void Animal::collision(Organism *org)
 {
     if (org->getType() == ANIMAL)
     {
-        anCollision((Animal*)org);   
+        anCollision((Animal *)org);
     }
     else
     {
