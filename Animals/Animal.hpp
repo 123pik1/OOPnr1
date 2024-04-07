@@ -11,7 +11,7 @@ class Animal : public Organism
         virtual void action();
         virtual void collision(Organism *org);
         virtual void move();
-        virtual void returnPosition();
+        virtual void retreat();
         virtual void fight(Organism *org);
         virtual void anCollision(Animal *org);
         virtual void moving(int dist, int direction);
