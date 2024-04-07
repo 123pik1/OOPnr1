@@ -139,7 +139,7 @@ void Animal::collision(Organism *org)
     }
 }
 
-void Animal::retreat()
+void Animal::returnToPos()
 {
     x = prevX;
     y = prevY;

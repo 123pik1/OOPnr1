@@ -24,7 +24,7 @@ void Turtle::collision(Organism* org)
     if (org->getStrength() < 5)
     {
         
-        anim->retreat();
+        anim->returnToPos();
     }
     else
     {
