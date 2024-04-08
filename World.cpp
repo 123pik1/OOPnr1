@@ -1,5 +1,16 @@
 #include "World.hpp"
 #include "Organism.hpp"
+#include "./Animals/Wolf.hpp"
+#include "./Animals/Sheep.hpp"
+#include "./Animals/Fox.hpp"
+#include "./Animals/Turtle.hpp"
+#include "./Animals/Antelope.hpp"
+#include "./Plants/Grass.hpp"
+#include "./Plants/Guarana.hpp"
+#include "./Plants/Belladonna.hpp"
+#include "./Plants/Sosnowsky.hpp"
+#include "./Plants/Sonchus.hpp"
+
 
 World::World(int witdh, int height)
 {
@@ -31,6 +42,9 @@ bool World::actTurn()
 
 void World::drawWorld()
 {
+    clear();
+    WINDOW *win = newwin(height, witdh, 0, 0);
+    box(win, 0, 0);
     for (int i = 0; i < organisms.size(); i++)
     {
         organisms[i]->draw();
@@ -87,14 +101,63 @@ Organism* World::getOrganism(int x, int y)
 
 void World::readMap()
 {
-    // std::ifstream i("world.json");
-    // json j;
-    // i >> j;
-    // for (json& organism : j)
-    // {
-    //     std::string type = organism["type"];
-    //     auto species = organism["species"];
-    //     printf("%s\n", type.c_str());
-    //     std::cout << species << std::endl;
-    // }
+
+}
+
+void World::readWorld()
+{
+    fstream file("world.txt");
+    int x,y,strength;
+    string species;
+    if (file.is_open())
+    {
+        while (!file.eof())
+        {
+            file >> x >> y >> strength >> species;
+            if (species == "Wolf")
+            {
+                addOrganism(new Wolf(x, y, *this));
+            }
+            else if (species == "Sheep")
+            {
+                addOrganism(new Sheep(x, y, *this));
+            }
+            else if (species == "Fox")
+            {
+                addOrganism(new Fox(x, y, *this));
+            }
+            else if (species == "Turtle")
+            {
+                addOrganism(new Turtle(x, y, *this));
+            }
+            else if (species == "Antelope")
+            {
+                addOrganism(new Antelope(x, y, *this));
+            }
+            else if (species == "Grass")
+            {
+                addOrganism(new Grass(x, y, *this));
+            }
+            else if (species == "Guarana")
+            {
+                addOrganism(new Guarana(x, y, *this));
+            }
+            else if (species == "Belladonna")
+            {
+                addOrganism(new Belladonna(x, y, *this));
+            }
+            else if (species == "Sosnowsky")
+            {
+                addOrganism(new Sosnowsky(x, y, *this));
+            }
+            else if (species == "Sonchus")
+            {
+                addOrganism(new Sonchus(x, y, *this));
+            }
+            
+        }
+    }
+
+
+
 }

@@ -28,5 +28,6 @@ public:
     void removeOrganism(Organism* organism);
     Organism* getOrganism(int x, int y);
     void readMap();
+    void readWorld();
     ~World();
 };

@@ -58,6 +58,11 @@ void Organism::draw()
     mvaddch(y, x, symbol[0]);
 }
 
+void Organism::draw(WINDOW* win)
+{
+    mvwaddch(win, y, x, symbol[0]);
+}
+
 int Organism::getStrength()
 {
     return strength;

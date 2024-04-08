@@ -36,5 +36,6 @@ public:
     virtual void action() = 0;
     virtual void collision(Organism *org) = 0;
     void draw();
+    void draw(WINDOW *win);
     void die();
 };
