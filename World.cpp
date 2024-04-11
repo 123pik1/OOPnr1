@@ -21,30 +21,40 @@ World::World(int witdh, int height)
     {
         map[i] = false;
     }
+    readWorld();
+    drawWorld();
+    addOrganism(new Wolf(5, 5, *this));
+    addOrganism(new Wolf(5, 7, *this));
+    addOrganism(new Wolf(5, 9, *this));
+    addOrganism(new Wolf(5, 11, *this));
+    addOrganism(new Sheep(10, 10, *this));
+    addOrganism(new Fox(15, 15, *this));
 }
 
 void World::mainloop()
 {
-    initscr();
-    while (actTurn());
+    while (actTurn())
+        drawWorld();
     endwin();
 }
 
 bool World::actTurn()
 {
+    if(getch()=='q')
+    return false;
     for (int i = 0; i < organisms.size(); i++)
     {
         organisms[i]->action();
     }
-    drawWorld();
     return true;
 }
 
 void World::drawWorld()
 {
     clear();
-    WINDOW *win = newwin(height, witdh, 0, 0);
-    box(win, 0, 0);
+    // WINDOW *win = newwin(15, 20, 10, 15);
+    // box(win, 1, 1);
+    // mvwprintw(win, 1, 1, "World");
     for (int i = 0; i < organisms.size(); i++)
     {
         organisms[i]->draw();
@@ -66,7 +76,7 @@ World::~World()
     {
         delete organisms[i];
     }
-    free(map);
+    // free(map);
 }
 
 bool World::isOccupied(int x, int y)
@@ -109,9 +119,11 @@ void World::readWorld()
     fstream file("world.txt");
     int x,y,strength;
     string species;
+    int nmbOfOrganisms;
     if (file.is_open())
     {
-        while (!file.eof())
+        file >> nmbOfOrganisms;
+        for (int i=0; i<nmbOfOrganisms; i++)
         {
             file >> x >> y >> strength >> species;
             if (species == "Wolf")

@@ -1,66 +1,31 @@
 #include "Organism.hpp"
 
-Organism::Organism()
+Organism::Organism(int x, int y, int strength, int initiative, char *symbol, orgType type, World &world)
+    : x(x), y(y), strength(strength), initiative(initiative), age(0), type(type), world(world), plSpecies(NO_PLANT), anSpecies(NO_ANIMAL)
 {
-    x = 0;
-    y = 0;
-    strength = 0;
-    initiative = 0;
-    age = 0;
-    symbol[0] = '\0';
+    strcpy(this->symbol, symbol);
 }
 
-
-Organism::Organism(int x, int y, int strength, int initiative, char* symbol, orgType type, World& world)
+Organism::Organism(int x, int y, int strength, int initiative, char *symbol, World &world, plantTypes plSpecies)
+    : x(x), y(y), strength(strength), initiative(initiative), age(0), type(PLANT), plSpecies(plSpecies), anSpecies(NO_ANIMAL), world(world)
 {
-    this->x = x;
-    this->y = y;
-    this->strength = strength;
-    this->initiative = initiative;
-    this->age =0;
-    strcpy(this->symbol, symbol); 
-    this->world = world;
-    this->type = type;
-    plSpecies = NO_PLANT;
-    anSpecies = NO_ANIMAL;
+    strcpy(this->symbol, symbol);
 }
 
-Organism::Organism(int x, int y, int strength, int initiative, char* symbol, World& world, plantTypes plSpecies)
+Organism::Organism(int x, int y, int strength, int initiative, char *symbol, World &world, animalTypes anSpecies)
+    : x(x), y(y), strength(strength), initiative(initiative), age(0), type(ANIMAL), plSpecies(NO_PLANT), anSpecies(anSpecies), world(world)
 {
-    this->x = x;
-    this->y = y;
-    this->strength = strength;
-    this->initiative = initiative;
-    this->age =0;
-    strcpy(this->symbol, symbol); 
-    this->world = world;
-    this->type = PLANT;
-    this->plSpecies = plSpecies;
-    anSpecies = NO_ANIMAL;
-}
-
-Organism::Organism(int x, int y, int strength, int initiative, char* symbol, World& world, animalTypes anSpecies)
-{
-    this->x = x;
-    this->y = y;
-    this->strength = strength;
-    this->initiative = initiative;
-    this->age =0;
-    strcpy(this->symbol, symbol); 
-    this->world = world;
-    this->type = ANIMAL;
-    plSpecies = NO_PLANT;
-    this->anSpecies = anSpecies;
+    strcpy(this->symbol, symbol);
 }
 
 void Organism::draw()
 {
-    mvaddch(y, x, symbol[0]);
+    mvprintw(y, x, symbol);
 }
 
-void Organism::draw(WINDOW* win)
+void Organism::draw(WINDOW *win)
 {
-    mvwaddch(win, y, x, symbol[0]);
+    mvwprintw(win, y, x, symbol);
 }
 
 int Organism::getStrength()

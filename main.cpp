@@ -2,9 +2,10 @@
 
 int main()
 {
+    initscr();
+    noecho();
     World world(20, 20);
-    world.readMap();
     world.mainloop();
-
+    endwin();
     return 0;
 }

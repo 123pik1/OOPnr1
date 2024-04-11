@@ -64,7 +64,28 @@ void Animal::moving(int dist, int direction)
 void Animal::move()
 {
     int dist = 1;
+    bool dirs[4] = {false, false, false, false};
+    if (y - dist >= 0)
+    {
+        dirs[0] = true;
+    }
+    if (y + dist < world.getHeight())
+    {
+        dirs[1] = true;
+    }
+    if (x - dist >= 0)
+    {
+        dirs[2] = true;
+    }
+    if (x + dist < world.getWidth())
+    {
+        dirs[3] = true;
+    }
     int direction = rand() % 4;
+    while (dirs[direction] == false)
+    {
+        direction = rand() % 4;
+    }
     moving(dist, direction);
 }
 void Animal::fight(Organism *org)

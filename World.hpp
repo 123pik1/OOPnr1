@@ -29,5 +29,7 @@ public:
     Organism* getOrganism(int x, int y);
     void readMap();
     void readWorld();
+    int getWidth() {return witdh;}
+    int getHeight() {return height;}
     ~World();
 };

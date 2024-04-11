@@ -1,2 +1,3 @@
-5 human 5 5
-3 turtle 3 3
+2
+5 Human 5 5
+3 Turtle 3 3
