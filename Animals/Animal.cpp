@@ -84,6 +84,18 @@ void Animal::move()
         dirs[3] = true;
     }
     int direction = rand() % 4;
+    for (int i = 1; i <= 4; i++)
+    {
+        if (dirs[i - 1] == true)
+        {
+            break;
+        }
+        if (i == 4)
+        {
+            return;
+        }
+    }
+    //ogarnąć sprawdzanie czy nie wychodzi poza mapę, problem z zapętleniem, może ograniczyć ilość prób
     while (dirs[direction] == false)
     {
         direction = rand() % 4;
@@ -107,25 +119,41 @@ void Animal::anCollision(Animal *org)
     if (anSpecies == org->getAnSpecies())
     {
         int i = 0;
-        if (world->isOccupied(x, y + 1) == false)
+        bool dirs[4] = {false, false, false, false};
+        if (world->isOccupied(x, y + 1) == false && y+1<world->getHeight())
         {
             i++;
+            dirs[0] = true;
         }
-        if (world->isOccupied(x, y - 1) == false)
+        if (world->isOccupied(x, y - 1) == false && y-1>=0)
         {
             i++;
+            dirs[1] = true;
         }
-        if (world->isOccupied(x + 1, y) == false)
+        if (world->isOccupied(x + 1, y) == false && x+1<world->getWidth())
         {
             i++;
+            dirs[2] = true;
         }
-        if (world->isOccupied(x - 1, y) == false)
+        if (world->isOccupied(x - 1, y) == false && x-1>=0)
         {
             i++;
+            dirs[3] = true;
         }
         if (i != 0)
         {
             int option = (rand() % i) + 1;
+
+            while (dirs[option] == false)
+            {
+                option++;
+                if (option == 4)
+                {
+                    option = 0;
+                }
+            }
+            option++;
+           
             switch (option)
             {
             case 1:

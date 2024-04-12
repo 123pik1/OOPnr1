@@ -18,7 +18,7 @@ World::World(int witdh, int height)
 {
     this->witdh = witdh;
     this->height = height;
-    map = (bool *)calloc(witdh * height, sizeof(bool));
+    map = (bool *)malloc(witdh * height* sizeof(bool));
     for (int i = 0; i < witdh * height; i++)
     {
         map[i] = false;
@@ -86,20 +86,25 @@ void World::drawWorld()
 void World::addOrganism(Organism *organism)
 {
     organisms.push_back(organism);
+    if (organism->getX() >= 0 && organism->getY() >= 0 && organism->getX() < witdh && organism->getY() < height)
     map[organism->getX() + organism->getY() * witdh] = true;
 }
 
 World::~World()
 {
-    for (int i = 0; i < organisms.size(); i++)
-    {
-        delete organisms[i];
-    }
+    // for (int i = 0; i < organisms.size(); i++)
+    // {
+    //     delete organisms[i];
+    // }
     // free(map);
 }
 
 bool World::isOccupied(int x, int y)
 {
+    if (x < 0 || y < 0 || x >= witdh || y >= height)
+    {
+        return false;
+    }
     return map[x + y * witdh];
 }
 
@@ -109,7 +114,7 @@ void World::removeOrganism(Organism *organism)
     {
         if (organisms[i] == organism)
         {
-            
+            // organisms.erase(organisms.begin() + i);
             break;
         }
     }
