@@ -8,6 +8,7 @@ Belladonna::Belladonna(int x, int y, World* world) : Plant(x, y, 99, "B", BELLAD
 void Belladonna::collision(Organism* org)
 {
     org->die();
+    Plant::collision(org);
 }
 
 void Belladonna::action() 

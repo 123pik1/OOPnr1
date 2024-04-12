@@ -8,6 +8,7 @@ Sosnowsky::Sosnowsky(int x, int y, World* world) : Plant(x, y, 10, "W", SOSNOWSK
 void Sosnowsky::collision(Organism* org)
 {
     org->die();
+    Plant::collision(org);
 }
 
 void Sosnowsky::action() 

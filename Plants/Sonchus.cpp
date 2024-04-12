@@ -4,10 +4,7 @@ Sonchus::Sonchus(int x, int y,  World* world) : Plant(x, y, 0, "S", SONCHUS, wor
 {
 }
 
-void Sonchus::collision(Organism* org)
-{
-    
-}
+
 
 Plant* Sonchus::newPlant(int x, int y)
 {
