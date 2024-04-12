@@ -10,13 +10,15 @@
 #include "./Plants/Belladonna.hpp"
 #include "./Plants/Sosnowsky.hpp"
 #include "./Plants/Sonchus.hpp"
+#include "./Animals/Human.hpp"
 
+using namespace std;
 
 World::World(int witdh, int height)
 {
     this->witdh = witdh;
     this->height = height;
-    map=(bool*) calloc(witdh*height, sizeof(bool));
+    map = (bool *)calloc(witdh * height, sizeof(bool));
     for (int i = 0; i < witdh * height; i++)
     {
         map[i] = false;
@@ -27,8 +29,11 @@ World::World(int witdh, int height)
     addOrganism(new Wolf(5, 7, *this));
     addOrganism(new Wolf(5, 9, *this));
     addOrganism(new Wolf(5, 11, *this));
-    addOrganism(new Sheep(10, 10, *this));
-    addOrganism(new Fox(15, 15, *this));
+    addOrganism(new Wolf(5, 8, *this));
+    addOrganism(new Wolf(5, 7, *this));
+    addOrganism(new Wolf(5, 2, *this));
+    addOrganism(new Wolf(5, 19, *this));
+
 }
 
 void World::mainloop()
@@ -37,14 +42,20 @@ void World::mainloop()
         drawWorld();
     endwin();
 }
-
 bool World::actTurn()
 {
-    if(getch()=='q')
-    return false;
-    for (int i = 0; i < organisms.size(); i++)
+    sort(organisms.begin(), organisms.end(), [](Organism *a, Organism *b) {
+        if (a->getInitiative() == b->getInitiative())
+        {
+            return a->getAge() > b->getAge();
+        }
+        return a->getInitiative() > b->getInitiative();
+    });
+    if (getch() == 'q')
+        return false;
+    for (auto org : organisms)
     {
-        organisms[i]->action();
+        org->action();
     }
     return true;
 }
@@ -55,20 +66,17 @@ void World::drawWorld()
     // WINDOW *win = newwin(15, 20, 10, 15);
     // box(win, 1, 1);
     // mvwprintw(win, 1, 1, "World");
-    for (int i = 0; i < organisms.size(); i++)
+    for (auto org : organisms)
     {
-        organisms[i]->draw();
+        org->draw();
     }
     refresh();
 }
 
-
-
-void World::addOrganism(Organism* organism)
+void World::addOrganism(Organism *organism)
 {
     organisms.push_back(organism);
 }
-
 
 World::~World()
 {
@@ -84,7 +92,7 @@ bool World::isOccupied(int x, int y)
     return map[x + y * witdh];
 }
 
-void World::removeOrganism(Organism* organism)
+void World::removeOrganism(Organism *organism)
 {
     for (int i = 0; i < organisms.size(); i++)
     {
@@ -96,7 +104,7 @@ void World::removeOrganism(Organism* organism)
     }
 }
 
-Organism* World::getOrganism(int x, int y)
+Organism *World::getOrganism(int x, int y)
 {
     for (int i = 0; i < organisms.size(); i++)
     {
@@ -108,22 +116,20 @@ Organism* World::getOrganism(int x, int y)
     return NULL;
 }
 
-
 void World::readMap()
 {
-
 }
 
 void World::readWorld()
 {
     fstream file("world.txt");
-    int x,y,strength;
+    int x, y, strength;
     string species;
     int nmbOfOrganisms;
     if (file.is_open())
     {
         file >> nmbOfOrganisms;
-        for (int i=0; i<nmbOfOrganisms; i++)
+        for (int i = 0; i < nmbOfOrganisms; i++)
         {
             file >> x >> y >> strength >> species;
             if (species == "Wolf")
@@ -166,10 +172,6 @@ void World::readWorld()
             {
                 addOrganism(new Sonchus(x, y, *this));
             }
-            
         }
     }
-
-
-
 }

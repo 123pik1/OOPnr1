@@ -4,9 +4,9 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include <fstream>
+#include <algorithm>
 // using json = nlohmann::json;
 
-using namespace std;
 
 class Organism;
 
@@ -15,7 +15,7 @@ class World
 private:
     int witdh;
     int height;
-    vector<Organism*> organisms;
+    std::vector<Organism*> organisms;
     bool* map ;
     void drawWorld();
     bool actTurn();

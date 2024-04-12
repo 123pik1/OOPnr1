@@ -28,8 +28,8 @@ void Human::move()
 {
     int direction;
     int dist = 1;
-    std::cin >> direction;
-    switch (direction)
+    
+    switch (getch())
     {
         case KEY_DOWN:
             moving(dist, 1);

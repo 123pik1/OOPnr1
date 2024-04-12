@@ -12,7 +12,7 @@ protected:
     int initiative;
     int age;
     char symbol[5];
-    World& world;
+    World world;
     orgType type;
     plantTypes plSpecies;
     animalTypes anSpecies;
@@ -21,7 +21,7 @@ public:
     Organism(int x, int y, int strength, int initiative, char *symbol, orgType type, World& world);
     Organism(int x, int y, int strength, int initiative, char *symbol, World& world, plantTypes plSpecies);
     Organism(int x, int y, int strength, int initiative, char *symbol, World& world, animalTypes anSpecies);
-
+    
     int getStrength();
     int getX();
     int getY();
