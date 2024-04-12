@@ -4,7 +4,7 @@
 class Grass : public Plant
 {
     public:
-        Grass(int x, int y, World& world);
+        Grass(int x, int y, World* world);
         Plant* newPlant(int x, int y);
         void collision(Organism* org);
 };

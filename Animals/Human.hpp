@@ -7,7 +7,7 @@ class Human:public Animal
         int abilityCooldown=0;
 
     public:
-        Human(int x, int y, World& world);
+        Human(int x, int y, World* world);
         void action();
         void useAbility();
         void abilityRegen();

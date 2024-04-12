@@ -1,6 +1,6 @@
 #include "Antelope.hpp"
 
-Antelope::Antelope(int x, int y, World &world):Animal(x, y, 4, 4, "A", world, ANTELOPE)
+Antelope::Antelope(int x, int y, World *world):Animal(x, y, 4, 4, "A", world, ANTELOPE)
 {
 }
 
@@ -17,7 +17,7 @@ void Antelope::move()
     {
         dirs[0] = true;
     }
-    if (y + dist < world.getHeight())
+    if (y + dist < world->getHeight())
     {
         dirs[1] = true;
     }
@@ -25,7 +25,7 @@ void Antelope::move()
     {
         dirs[2] = true;
     }
-    if (x + dist < world.getWidth())
+    if (x + dist < world->getWidth())
     {
         dirs[3] = true;
     }
@@ -40,19 +40,19 @@ void Antelope::move()
 void Antelope::retreat()
 {
     bool dirs [4] = {false};
-    if (!world.isOccupied(x,y-1) || world.getOrganism(x,y-2)->getStrength()<=this->strength)
+    if (!world->isOccupied(x,y-1) || world->getOrganism(x,y-2)->getStrength()<=this->strength)
     {
         dirs[0]=true;
     }
-    if (!world.isOccupied(x,y+1) || world.getOrganism(x,y+2)->getStrength()<=this->strength)
+    if (!world->isOccupied(x,y+1) || world->getOrganism(x,y+2)->getStrength()<=this->strength)
     {
         dirs[1]=true;
     }
-    if (!world.isOccupied(x-1,y) || world.getOrganism(x-2,y)->getStrength()<=this->strength)
+    if (!world->isOccupied(x-1,y) || world->getOrganism(x-2,y)->getStrength()<=this->strength)
     {
         dirs[2]=true;
     }
-    if (!world.isOccupied(x+1,y) || world.getOrganism(x+2,y)->getStrength()<=this->strength)
+    if (!world->isOccupied(x+1,y) || world->getOrganism(x+2,y)->getStrength()<=this->strength)
     {
         dirs[3]=true;
     }

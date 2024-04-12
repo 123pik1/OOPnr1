@@ -1,6 +1,6 @@
 #include "Turtle.hpp"  
 
-Turtle::Turtle(int x, int y, World &world):Animal(x, y, 2, 1, "T", world, TURTLE)
+Turtle::Turtle(int x, int y, World *world):Animal(x, y, 2, 1, "T", world, TURTLE)
 {
 }
 

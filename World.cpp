@@ -25,14 +25,15 @@ World::World(int witdh, int height)
     }
     readWorld();
     drawWorld();
-    addOrganism(new Wolf(5, 5, *this));
-    addOrganism(new Wolf(5, 7, *this));
-    addOrganism(new Wolf(5, 9, *this));
-    addOrganism(new Wolf(5, 11, *this));
-    addOrganism(new Wolf(5, 8, *this));
-    addOrganism(new Wolf(5, 7, *this));
-    addOrganism(new Wolf(5, 2, *this));
-    addOrganism(new Wolf(5, 19, *this));
+    addOrganism(new Wolf(5, 5, this));
+    addOrganism(new Wolf(5, 7, this));
+    addOrganism(new Wolf(5, 9, this));
+    addOrganism(new Wolf(5, 11, this));
+    addOrganism(new Wolf(5, 8, this));
+    addOrganism(new Wolf(5, 7, this));
+    addOrganism(new Wolf(5, 2, this));
+    addOrganism(new Wolf(5, 19, this));
+    addOrganism(new Grass(5, 6, this));
 
 }
 
@@ -134,43 +135,43 @@ void World::readWorld()
             file >> x >> y >> strength >> species;
             if (species == "Wolf")
             {
-                addOrganism(new Wolf(x, y, *this));
+                addOrganism(new Wolf(x, y, this));
             }
             else if (species == "Sheep")
             {
-                addOrganism(new Sheep(x, y, *this));
+                addOrganism(new Sheep(x, y, this));
             }
             else if (species == "Fox")
             {
-                addOrganism(new Fox(x, y, *this));
+                addOrganism(new Fox(x, y, this));
             }
             else if (species == "Turtle")
             {
-                addOrganism(new Turtle(x, y, *this));
+                addOrganism(new Turtle(x, y, this));
             }
             else if (species == "Antelope")
             {
-                addOrganism(new Antelope(x, y, *this));
+                addOrganism(new Antelope(x, y, this));
             }
             else if (species == "Grass")
             {
-                addOrganism(new Grass(x, y, *this));
+                addOrganism(new Grass(x, y, this));
             }
             else if (species == "Guarana")
             {
-                addOrganism(new Guarana(x, y, *this));
+                addOrganism(new Guarana(x, y, this));
             }
             else if (species == "Belladonna")
             {
-                addOrganism(new Belladonna(x, y, *this));
+                addOrganism(new Belladonna(x, y, this));
             }
             else if (species == "Sosnowsky")
             {
-                addOrganism(new Sosnowsky(x, y, *this));
+                addOrganism(new Sosnowsky(x, y, this));
             }
             else if (species == "Sonchus")
             {
-                addOrganism(new Sonchus(x, y, *this));
+                addOrganism(new Sonchus(x, y, this));
             }
         }
     }

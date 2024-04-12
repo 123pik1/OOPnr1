@@ -1,6 +1,6 @@
 #include "Sosnowsky.hpp"
 
-Sosnowsky::Sosnowsky(int x, int y, World& world) : Plant(x, y, 10, "W", SOSNOWSKY_HOGWEED, world)
+Sosnowsky::Sosnowsky(int x, int y, World* world) : Plant(x, y, 10, "W", SOSNOWSKY_HOGWEED, world)
 {
 
 }
@@ -12,9 +12,9 @@ void Sosnowsky::collision(Organism* org)
 
 void Sosnowsky::action() 
 {
-    if (world.isOccupied(x, y + 1) == true)
+    if (world->isOccupied(x, y + 1) == true)
     {
-        Organism* org = world.getOrganism(x, y + 1);
+        Organism* org = world->getOrganism(x, y + 1);
         if (org->getType() == ANIMAL)
         {
             if (org->getAnSpecies()!=CYBER_SHEEP)

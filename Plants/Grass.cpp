@@ -1,6 +1,6 @@
 #include "Grass.hpp"
 
-Grass::Grass(int x, int y,  World& world) : Plant(x, y, 0, "G", GRASS, world)
+Grass::Grass(int x, int y,  World* world) : Plant(x, y, 0, "G", GRASS, world)
 {
 }
 
