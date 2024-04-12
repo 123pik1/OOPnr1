@@ -2,6 +2,7 @@
 
 int main()
 {
+    srand(time(NULL));
     initscr();
     keypad(stdscr, TRUE);
     noecho();

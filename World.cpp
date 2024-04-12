@@ -61,6 +61,15 @@ bool World::actTurn()
     return true;
 }
 
+void World::setFalse(int x, int y)
+{
+    map[x + y * witdh] = false;
+}
+void World::setTrue(int x, int y)
+{
+    map[x + y * witdh] = true;
+}
+
 void World::drawWorld()
 {
     clear();
@@ -77,6 +86,7 @@ void World::drawWorld()
 void World::addOrganism(Organism *organism)
 {
     organisms.push_back(organism);
+    map[organism->getX() + organism->getY() * witdh] = true;
 }
 
 World::~World()
@@ -99,7 +109,7 @@ void World::removeOrganism(Organism *organism)
     {
         if (organisms[i] == organism)
         {
-            organisms.erase(organisms.begin() + i);
+            
             break;
         }
     }

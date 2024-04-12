@@ -26,6 +26,8 @@ public:
     void addOrganism(Organism* organism);
     bool isOccupied(int x, int y);
     void removeOrganism(Organism* organism);
+    void setFalse(int x, int y);
+    void setTrue(int x, int y);
     Organism* getOrganism(int x, int y);
     void readMap();
     void readWorld();

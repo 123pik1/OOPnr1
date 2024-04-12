@@ -6,6 +6,8 @@ Human::Human(int x, int y, World* world) : Animal(x, y, 5, 4, "H", world, HUMAN)
 
 void Human::action()
 {
+    prevX = x;
+    prevY = y;
     if (abilityCooldown > 0)
     {
         abilityRegen();

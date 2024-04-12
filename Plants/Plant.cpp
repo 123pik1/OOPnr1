@@ -8,19 +8,19 @@ Plant::Plant(int x, int y, int strength, char* symbol,plantTypes type, World* wo
 void Plant::action()
 {
     int i = 0;
-    if (world->isOccupied(x, y + 1) == false)
+    if (world->isOccupied(x, y + 1) == false && y+1<world->getHeight())
     {
         i++;
     }
-    if (world->isOccupied(x, y - 1) == false)
+    if (world->isOccupied(x, y - 1) == false && y-1>=0)
     {
         i++;
     }
-    if (world->isOccupied(x + 1, y) == false)
+    if (world->isOccupied(x + 1, y) == false && x+1<world->getWidth())
     {
         i++;
     }
-    if (world->isOccupied(x - 1, y) == false)
+    if (world->isOccupied(x - 1, y) == false && x-1>=0)
     {
         i++;
     }

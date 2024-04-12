@@ -14,6 +14,7 @@ void Animal::action()
 
 void Animal::moving(int dist, int direction)
 {
+    world->setFalse(x, y);
     switch (direction)
     {
     case 0:
@@ -59,6 +60,7 @@ void Animal::moving(int dist, int direction)
     default:
         break;
     }
+    world->setTrue(x, y);
 }
 
 void Animal::move()
