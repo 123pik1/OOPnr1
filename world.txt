@@ -1,3 +1,14 @@
-2
-5 Human 5 5
-3 Turtle 3 3
+40 20
+
+
+
+
+
+
+
+
+
+
+
+
+save to do - konstruktor world na nazwę pliku

@@ -13,12 +13,12 @@ protected:
     int age;
     char symbol[5];
     World* world;
-    orgType type;
+    orgType type= NO_ORGANISM;
     plantTypes plSpecies;
     animalTypes anSpecies;
+    std::string saveString;
 public:
-   // Organism();
-    Organism(int x, int y, int strength, int initiative, char *symbol, orgType type, World* world);
+    // Organism(int x, int y, int strength, int initiative, char *symbol, orgType type, World* world);
     Organism(int x, int y, int strength, int initiative, char *symbol, World* world, plantTypes plSpecies);
     Organism(int x, int y, int strength, int initiative, char *symbol, World* world, animalTypes anSpecies);
     
@@ -30,6 +30,7 @@ public:
     animalTypes getAnSpecies();
     plantTypes getPlSpecies();
     orgType getType();
+    virtual std::string getSaveString();
     void setStrength(int strength);
     virtual void action() = 0;
     virtual void collision(Organism *org) = 0;

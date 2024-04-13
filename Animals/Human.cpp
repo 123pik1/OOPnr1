@@ -1,7 +1,12 @@
 #include "Human.hpp"
-
+using namespace std;
 Human::Human(int x, int y, World* world) : Animal(x, y, 5, 4, "H", world, HUMAN)
 {
+}
+
+Human::Human(int x, int y, World* world, int cooldown) : Animal(x, y, 5, 4, "H", world, HUMAN)
+{
+    abilityCooldown = cooldown;
 }
 
 void Human::action()
@@ -58,4 +63,10 @@ void Human::useAbility()
 Animal* Human::newAnimal(int x, int y)
 {
     return new Human(x, y, world);
+}
+
+string Human::getSaveString()
+{
+    saveString = to_string(x) + " " + to_string(y) + " " + to_string(strength)+" " + to_string(age) + " " + string(1,anSpecies) + string(1,plSpecies) + " " + to_string(abilityCooldown);
+    return saveString;
 }

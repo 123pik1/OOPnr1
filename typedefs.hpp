@@ -23,5 +23,6 @@ enum
 enum 
 {
     PLANT = 'P',
-    ANIMAL = 'A'
+    ANIMAL = 'A',
+    NO_ORGANISM = ' '
 } typedef orgType;

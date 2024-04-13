@@ -18,25 +18,24 @@ World::World(int witdh, int height)
 {
     this->witdh = witdh;
     this->height = height;
-    map = (bool *)malloc(witdh * height* sizeof(bool));
+    map = (bool *)malloc(witdh * height * sizeof(bool));
     for (int i = 0; i < witdh * height; i++)
     {
         map[i] = false;
     }
     readWorld();
     drawWorld();
-    addOrganism(new Wolf(5, 5, this));
-    addOrganism(new Wolf(5, 7, this));
-    addOrganism(new Wolf(5, 9, this));
-    addOrganism(new Wolf(5, 11, this));
-    addOrganism(new Wolf(5, 8, this));
-    addOrganism(new Wolf(5, 7, this));
-    addOrganism(new Wolf(5, 2, this));
-    addOrganism(new Wolf(5, 19, this));
-    addOrganism(new Grass(5, 6, this));
-
+   
 }
 
+
+World::World()
+{
+    readWorld();
+
+    
+    drawWorld();
+}
 void World::mainloop()
 {
     while (actTurn())
@@ -45,18 +44,19 @@ void World::mainloop()
 }
 bool World::actTurn()
 {
-    sort(organisms.begin(), organisms.end(), [](Organism *a, Organism *b) {
+    sort(organisms.begin(), organisms.end(), [](Organism *a, Organism *b)
+         {
         if (a->getInitiative() == b->getInitiative())
         {
             return a->getAge() > b->getAge();
         }
-        return a->getInitiative() > b->getInitiative();
-    });
+        return a->getInitiative() > b->getInitiative(); });
     if (getch() == 'q')
         return false;
-    for (auto org : organisms)
+
+    for (int i = 0; i < organisms.size(); i++)
     {
-        org->action();
+        organisms[i]->action();
     }
     return true;
 }
@@ -73,30 +73,39 @@ void World::setTrue(int x, int y)
 void World::drawWorld()
 {
     clear();
-    // WINDOW *win = newwin(15, 20, 10, 15);
-    // box(win, 1, 1);
+    WINDOW *win = newwin(height+2, witdh+2, 0, 0);
+    refresh();
+    box(win, 0, 0);
     // mvwprintw(win, 1, 1, "World");
     for (auto org : organisms)
     {
-        org->draw();
+        org->draw(win);
     }
+    wrefresh(win);
     refresh();
 }
 
 void World::addOrganism(Organism *organism)
 {
-    organisms.push_back(organism);
+
     if (organism->getX() >= 0 && organism->getY() >= 0 && organism->getX() < witdh && organism->getY() < height)
-    map[organism->getX() + organism->getY() * witdh] = true;
+    {
+        map[organism->getX() + organism->getY() * witdh] = true;
+        organisms.push_back(organism);
+    }
+    else
+    {
+        delete organism;
+    }
 }
 
 World::~World()
 {
-    // for (int i = 0; i < organisms.size(); i++)
-    // {
-    //     delete organisms[i];
-    // }
-    // free(map);
+    for (int i = 0; i < organisms.size(); i++)
+    {
+        delete organisms[i];
+    }
+    free(map);
 }
 
 bool World::isOccupied(int x, int y)
@@ -114,7 +123,10 @@ void World::removeOrganism(Organism *organism)
     {
         if (organisms[i] == organism)
         {
-            // organisms.erase(organisms.begin() + i);
+            organisms.erase(organisms.begin() + i);
+            map[organism->getX() + organism->getY() * witdh] = false;
+            delete organism;
+
             break;
         }
     }
@@ -132,61 +144,69 @@ Organism *World::getOrganism(int x, int y)
     return NULL;
 }
 
-void World::readMap()
-{
-}
+
 
 void World::readWorld()
 {
     fstream file("world.txt");
     int x, y, strength;
     string species;
-    int nmbOfOrganisms;
+    int cooldown;
     if (file.is_open())
     {
-        file >> nmbOfOrganisms;
-        for (int i = 0; i < nmbOfOrganisms; i++)
+        file >> witdh >> height;
+        map = (bool *)malloc(witdh * height * sizeof(bool));
+        for (int i = 0; i < witdh * height; i++)
+        {
+            map[i] = false;
+        }
+        while (!file.eof())
         {
             file >> x >> y >> strength >> species;
-            if (species == "Wolf")
+            if (species == "W")
             {
                 addOrganism(new Wolf(x, y, this));
             }
-            else if (species == "Sheep")
+            else if (species == "S")
             {
                 addOrganism(new Sheep(x, y, this));
             }
-            else if (species == "Fox")
+            else if (species == "F")
             {
                 addOrganism(new Fox(x, y, this));
             }
-            else if (species == "Turtle")
+            else if (species == "T")
             {
                 addOrganism(new Turtle(x, y, this));
             }
-            else if (species == "Antelope")
+            else if (species == "A")
             {
                 addOrganism(new Antelope(x, y, this));
             }
-            else if (species == "Grass")
+            else if (species == "G")
             {
                 addOrganism(new Grass(x, y, this));
             }
-            else if (species == "Guarana")
+            else if (species == "U")
             {
                 addOrganism(new Guarana(x, y, this));
             }
-            else if (species == "Belladonna")
+            else if (species == "B")
             {
                 addOrganism(new Belladonna(x, y, this));
             }
-            else if (species == "Sosnowsky")
+            else if (species == "S")
             {
                 addOrganism(new Sosnowsky(x, y, this));
             }
-            else if (species == "Sonchus")
+            else if (species == "M")
             {
                 addOrganism(new Sonchus(x, y, this));
+            }
+            else if (species == "H")
+            {
+                file >> cooldown;
+                addOrganism(new Human(x, y, this, cooldown));
             }
         }
     }

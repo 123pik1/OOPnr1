@@ -19,6 +19,7 @@ private:
     bool* map ;
     void drawWorld();
     bool actTurn();
+    std::string communicate;
 public:
     World() {}
     World(int witdh, int height);
@@ -29,7 +30,6 @@ public:
     void setFalse(int x, int y);
     void setTrue(int x, int y);
     Organism* getOrganism(int x, int y);
-    void readMap();
     void readWorld();
     int getWidth() {return witdh;}
     int getHeight() {return height;}

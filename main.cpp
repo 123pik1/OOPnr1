@@ -7,7 +7,7 @@ int main()
     keypad(stdscr, TRUE);
     noecho();
     curs_set(0);
-    World world(20, 20);
+    World world(40, 30);
     world.mainloop();
     endwin();
     return 0;
