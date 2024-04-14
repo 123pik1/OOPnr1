@@ -1,0 +1,64 @@
+Organism.cpp: In member function ‘void Organism::draw()’:
+Organism.cpp:23:20: warning: format not a string literal and no format arguments [-Wformat-security]
+   23 |     mvprintw(y, x, symbol);
+      |                    ^~~~~~
+Organism.cpp: In member function ‘void Organism::draw(WINDOW*)’:
+Organism.cpp:28:30: warning: format not a string literal and no format arguments [-Wformat-security]
+   28 |     mvwprintw(win, y+1, x+1, symbol);
+      |                              ^~~~~~
+In file included from World.cpp:3:
+./Animals/Wolf.hpp: In constructor ‘Wolf::Wolf(int, int, World*)’:
+./Animals/Wolf.hpp:6:61: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    6 |         Wolf(int x, int y, World *world):Animal(x, y, 9, 5, "W", world, WOLF, "Wolf")
+      |                                                             ^~~
+In file included from World.cpp:4:
+./Animals/Sheep.hpp: In constructor ‘Sheep::Sheep(int, int, World*)’:
+./Animals/Sheep.hpp:7:62: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    7 |         Sheep(int x, int y, World *world):Animal(x, y, 4, 4, "S", world, SHEEP, "Sheep")
+      |                                                              ^~~
+In file included from World.cpp:6:
+./Animals/Turtle.hpp: In constructor ‘Turtle::Turtle(int, int, World*)’:
+./Animals/Turtle.hpp:7:61: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    7 |     Turtle(int x, int y, World *world) : Animal(x, y, 2, 1, "T", world, TURTLE, "Turtle")
+      |                                                             ^~~
+In file included from World.cpp:8:
+./Plants/Grass.hpp: In constructor ‘Grass::Grass(int, int, World*)’:
+./Plants/Grass.hpp:7:54: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    7 |     Grass(int x, int y, World *world):Plant(x, y, 0, "G", GRASS, world, "Grass")
+      |                                                      ^~~
+World.cpp: In member function ‘void World::drawWorld()’:
+World.cpp:87:14: warning: format not a string literal and no format arguments [-Wformat-security]
+   87 |     mvwprintw(communicateWin, 1, 1, communicate.c_str());
+      |     ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Animals/Antelope.cpp: In constructor ‘Antelope::Antelope(int, int, World*)’:
+Animals/Antelope.cpp:3:69: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    3 | Antelope::Antelope(int x, int y, World *world) : Animal(x, y, 4, 4, "A\0", world, ANTELOPE, "Antelope")
+      |                                                                     ^~~~~
+Animals/Fox.cpp: In constructor ‘Fox::Fox(int, int, World*)’:
+Animals/Fox.cpp:3:57: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    3 | Fox::Fox(int x, int y, World *world):Animal(x, y, 3, 7, "F", world, FOX, "Fox")
+      |                                                         ^~~
+Animals/Human.cpp: In constructor ‘Human::Human(int, int, World*)’:
+Animals/Human.cpp:3:63: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    3 | Human::Human(int x, int y, World* world) : Animal(x, y, 5, 4, "H", world, HUMAN, "Human")
+      |                                                               ^~~
+Animals/Human.cpp: In constructor ‘Human::Human(int, int, World*, int)’:
+Animals/Human.cpp:7:77: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    7 | Human::Human(int x, int y, World* world, int cooldown) : Animal(x, y, 5, 4, "H", world, HUMAN, "Human")
+      |                                                                             ^~~
+Plants/Belladonna.cpp: In constructor ‘Belladonna::Belladonna(int, int, World*)’:
+Plants/Belladonna.cpp:3:70: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    3 | Belladonna::Belladonna(int x, int y, World* world) : Plant(x, y, 99, "B", BELLADONNA, world, "Belladonna")
+      |                                                                      ^~~
+Plants/Guarana.cpp: In constructor ‘Guarana::Guarana(int, int, World*)’:
+Plants/Guarana.cpp:3:63: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    3 | Guarana::Guarana(int x, int y, World* world) : Plant(x, y, 0, "G", GUARANA, world, "Guarana")
+      |                                                               ^~~
+Plants/Sonchus.cpp: In constructor ‘Sonchus::Sonchus(int, int, World*)’:
+Plants/Sonchus.cpp:3:64: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    3 | Sonchus::Sonchus(int x, int y,  World* world) : Plant(x, y, 0, "O", SONCHUS, world, "Sonchus")
+      |                                                                ^~~
+Plants/Sosnowsky.cpp: In constructor ‘Sosnowsky::Sosnowsky(int, int, World*)’:
+Plants/Sosnowsky.cpp:3:68: warning: ISO C++ forbids converting a string constant to ‘char*’ [-Wwrite-strings]
+    3 | Sosnowsky::Sosnowsky(int x, int y, World* world) : Plant(x, y, 10, "W", SOSNOWSKY_HOGWEED, world, "Sosnowsky Hogweed")
+      |                                                                    ^~~

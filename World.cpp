@@ -24,6 +24,7 @@ World::World(int witdh, int height)
         map[i] = false;
     }
     readWorld();
+    addOrganism(new Grass(5, 5, this));
     drawWorld();
    
 }
@@ -32,8 +33,6 @@ World::World(int witdh, int height)
 World::World()
 {
     readWorld();
-
-    
     drawWorld();
 }
 void World::mainloop()
@@ -44,6 +43,7 @@ void World::mainloop()
 }
 bool World::actTurn()
 {
+    communicate = "";
     sort(organisms.begin(), organisms.end(), [](Organism *a, Organism *b)
          {
         if (a->getInitiative() == b->getInitiative())
@@ -57,6 +57,10 @@ bool World::actTurn()
     for (int i = 0; i < organisms.size(); i++)
     {
         organisms[i]->action();
+        if (organisms[i]!=NULL && communicate=="")
+        {
+            communicate = organisms[i]->getCommunicate();
+        }
     }
     return true;
 }
@@ -73,10 +77,15 @@ void World::setTrue(int x, int y)
 void World::drawWorld()
 {
     clear();
-    WINDOW *win = newwin(height+2, witdh+2, 0, 0);
+    WINDOW *win = newwin(height+2, witdh+2, 5, 0);
     refresh();
     box(win, 0, 0);
     // mvwprintw(win, 1, 1, "World");
+    WINDOW *communicateWin = newwin(5, 50, 0, 0);
+    refresh();
+    box(communicateWin, 0, 0);
+    mvwprintw(communicateWin, 1, 1, communicate.c_str());
+    wrefresh(communicateWin);
     for (auto org : organisms)
     {
         org->draw(win);
@@ -152,62 +161,83 @@ void World::readWorld()
     int x, y, strength;
     string species;
     int cooldown;
+    int age;
+    Organism *org;
     if (file.is_open())
     {
         file >> witdh >> height;
+
         map = (bool *)malloc(witdh * height * sizeof(bool));
+
         for (int i = 0; i < witdh * height; i++)
         {
             map[i] = false;
         }
+
         while (!file.eof())
         {
-            file >> x >> y >> strength >> species;
+
+            file >> x >> y >> strength >> age >> species;
+            cout << "File opened" << endl;
+            cout << x << " " << y << " " << strength<<" " << age << " " << species << endl;
             if (species == "W")
             {
-                addOrganism(new Wolf(x, y, this));
+                org = new Wolf(x, y, this);
             }
             else if (species == "S")
             {
-                addOrganism(new Sheep(x, y, this));
+                org = new Sheep(x, y, this);
             }
             else if (species == "F")
             {
-                addOrganism(new Fox(x, y, this));
+                org = new Fox(x, y, this);
             }
             else if (species == "T")
             {
-                addOrganism(new Turtle(x, y, this));
+                org = new Turtle(x, y, this);
             }
             else if (species == "A")
             {
-                addOrganism(new Antelope(x, y, this));
+                org = new Antelope(x, y, this);
             }
             else if (species == "G")
             {
-                addOrganism(new Grass(x, y, this));
+                org = new Grass(x, y, this);
             }
             else if (species == "U")
             {
-                addOrganism(new Guarana(x, y, this));
+                org = new Guarana(x, y, this);
             }
             else if (species == "B")
             {
-                addOrganism(new Belladonna(x, y, this));
+                org = new Belladonna(x, y, this);
             }
-            else if (species == "S")
+            else if (species == "O")
             {
-                addOrganism(new Sosnowsky(x, y, this));
+                org = new Sosnowsky(x, y, this);
             }
             else if (species == "M")
             {
-                addOrganism(new Sonchus(x, y, this));
+                org = new Sonchus(x, y, this);
             }
             else if (species == "H")
             {
-                file >> cooldown;
-                addOrganism(new Human(x, y, this, cooldown));
+                // if (file.good())
+                // {file >> cooldown;
+
+                // org = new Human(x, y, this, cooldown);}
+                // else
+                // {
+                //     org = new Human(x, y, this);
+                // }
             }
+            org->setAge(age);
+            org->setStrength(strength);
+            addOrganism(org);
         }
+    }
+    else
+    {
+        cout << "Error while opening file" << endl;
     }
 }

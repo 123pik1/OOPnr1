@@ -1,4 +1,5 @@
 40 20
+15 15 5 3 S
 
 
 
@@ -9,6 +10,3 @@
 
 
 
-
-
-save to do - konstruktor world na nazwę pliku

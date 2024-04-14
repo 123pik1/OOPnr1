@@ -1,10 +1,10 @@
 #include "Human.hpp"
 using namespace std;
-Human::Human(int x, int y, World* world) : Animal(x, y, 5, 4, "H", world, HUMAN)
+Human::Human(int x, int y, World* world) : Animal(x, y, 5, 4, "H", world, HUMAN, "Human")
 {
 }
 
-Human::Human(int x, int y, World* world, int cooldown) : Animal(x, y, 5, 4, "H", world, HUMAN)
+Human::Human(int x, int y, World* world, int cooldown) : Animal(x, y, 5, 4, "H", world, HUMAN, "Human")
 {
     abilityCooldown = cooldown;
 }

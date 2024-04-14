@@ -21,7 +21,7 @@ private:
     bool actTurn();
     std::string communicate;
 public:
-    World() {}
+    World();
     World(int witdh, int height);
     void mainloop();
     void addOrganism(Organism* organism);

@@ -6,14 +6,14 @@ using namespace std;
 //     strcpy(this->symbol, symbol);
 // }
 
-Organism::Organism(int x, int y, int strength, int initiative, char *symbol, World* world, plantTypes plSpecies)
-    : x(x), y(y), strength(strength), initiative(initiative), age(0), type(PLANT), plSpecies(plSpecies), anSpecies(NO_ANIMAL), world(world)
+Organism::Organism(int x, int y, int strength, int initiative, char *symbol, World* world, plantTypes plSpecies, std::string name)
+    : x(x), y(y), strength(strength), initiative(initiative), age(0), type(PLANT), plSpecies(plSpecies), anSpecies(NO_ANIMAL), world(world), name(name)
 {
     strcpy(this->symbol, symbol);
 }
 
-Organism::Organism(int x, int y, int strength, int initiative, char *symbol, World* world, animalTypes anSpecies)
-    : x(x), y(y), strength(strength), initiative(initiative), age(0), type(ANIMAL), plSpecies(NO_PLANT), anSpecies(anSpecies), world(world)
+Organism::Organism(int x, int y, int strength, int initiative, char *symbol, World* world, animalTypes anSpecies, std::string name)
+    : x(x), y(y), strength(strength), initiative(initiative), age(0), type(ANIMAL), plSpecies(NO_PLANT), anSpecies(anSpecies), world(world), name(name)
 {
     strcpy(this->symbol, symbol);
 }
@@ -75,4 +75,18 @@ plantTypes Organism::getPlSpecies()
 orgType Organism::getType()
 {
     return type;
+}
+
+void Organism::setAge(int age)
+{
+    this->age = age;
+}
+
+string Organism::getName()
+{
+    return name;
+}
+string Organism::getCommunicate()
+{
+    return communicate;
 }

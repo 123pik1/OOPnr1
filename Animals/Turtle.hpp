@@ -4,7 +4,7 @@
 class Turtle : public Animal
 {
 public:
-    Turtle(int x, int y, World *world) : Animal(x, y, 2, 1, "T", world, TURTLE)
+    Turtle(int x, int y, World *world) : Animal(x, y, 2, 1, "T", world, TURTLE, "Turtle")
     {
     }
 
@@ -28,6 +28,7 @@ public:
         {
 
             anim->returnToPos();
+            communicate="Turtle blocked attack";
         }
         else
         {

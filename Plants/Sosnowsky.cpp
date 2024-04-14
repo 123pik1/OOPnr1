@@ -1,6 +1,6 @@
 #include "Sosnowsky.hpp"
 
-Sosnowsky::Sosnowsky(int x, int y, World* world) : Plant(x, y, 10, "W", SOSNOWSKY_HOGWEED, world)
+Sosnowsky::Sosnowsky(int x, int y, World* world) : Plant(x, y, 10, "W", SOSNOWSKY_HOGWEED, world, "Sosnowsky Hogweed")
 {
 
 }

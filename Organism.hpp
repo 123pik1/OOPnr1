@@ -16,17 +16,22 @@ protected:
     orgType type= NO_ORGANISM;
     plantTypes plSpecies;
     animalTypes anSpecies;
+    std::string name;
     std::string saveString;
+    std::string communicate;
 public:
     // Organism(int x, int y, int strength, int initiative, char *symbol, orgType type, World* world);
-    Organism(int x, int y, int strength, int initiative, char *symbol, World* world, plantTypes plSpecies);
-    Organism(int x, int y, int strength, int initiative, char *symbol, World* world, animalTypes anSpecies);
+    Organism(int x, int y, int strength, int initiative, char *symbol, World* world, plantTypes plSpecies, std::string name);
+    Organism(int x, int y, int strength, int initiative, char *symbol, World* world, animalTypes anSpecies, std::string name);
     
     int getStrength();
     int getX();
     int getY();
     int getInitiative();
     int getAge();
+    std::string getName();
+    std::string getCommunicate();
+    void setAge(int age);
     animalTypes getAnSpecies();
     plantTypes getPlSpecies();
     orgType getType();

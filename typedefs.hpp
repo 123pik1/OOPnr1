@@ -4,7 +4,7 @@ enum
     SONCHUS = 'M',
     GUARANA = 'U',
     BELLADONNA = 'B',
-    SOSNOWSKY_HOGWEED = 'S',
+    SOSNOWSKY_HOGWEED = 'O',
     NO_PLANT = ' '
 }typedef plantTypes; 
 

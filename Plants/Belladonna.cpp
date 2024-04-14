@@ -1,6 +1,6 @@
 #include "Belladonna.hpp"
 
-Belladonna::Belladonna(int x, int y, World* world) : Plant(x, y, 99, "B", BELLADONNA, world)
+Belladonna::Belladonna(int x, int y, World* world) : Plant(x, y, 99, "B", BELLADONNA, world, "Belladonna")
 {
 
 }

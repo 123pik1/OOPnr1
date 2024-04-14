@@ -1,6 +1,6 @@
 #include "Animal.hpp"
 
-Animal::Animal(int x, int y, int strength, int initiative, char *symbol, World *world, animalTypes anSpecies) : Organism(x, y, strength, initiative, symbol, world, anSpecies)
+Animal::Animal(int x, int y, int strength, int initiative, char *symbol, World *world, animalTypes anSpecies, std::string name) : Organism(x, y, strength, initiative, symbol, world, anSpecies, name)
 {
 }
 
@@ -107,6 +107,7 @@ void Animal::fight(Organism *org)
     if (this->getStrength() > org->getStrength())
     {
         org->die();
+        communicate = this->getName() + " killed " + org->getName();
     }
     else
     {
@@ -175,6 +176,7 @@ void Animal::anCollision(Animal *org)
     }
     else
     {
+        org->collision(this);
         fight(org);
     }
 }

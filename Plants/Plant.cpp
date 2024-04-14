@@ -1,6 +1,6 @@
 #include "Plant.hpp"
 
-Plant::Plant(int x, int y, int strength, char* symbol,plantTypes type, World* world) : Organism(x, y, strength, 0, symbol, world, type)
+Plant::Plant(int x, int y, int strength, char* symbol,plantTypes type, World* world, std::string name) : Organism(x, y, strength, 0, symbol, world, type, name)
 {
     
 }
@@ -44,6 +44,7 @@ void Plant::action()
         default:
             break;
         }
+        this->communicate=this->name+" has spreaded";
     }
 }
 

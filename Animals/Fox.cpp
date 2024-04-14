@@ -1,6 +1,6 @@
 #include "Fox.hpp"
 
-Fox::Fox(int x, int y, World *world):Animal(x, y, 3, 7, "F", world, FOX)
+Fox::Fox(int x, int y, World *world):Animal(x, y, 3, 7, "F", world, FOX, "Fox")
 {
 }
 
