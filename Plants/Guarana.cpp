@@ -1,6 +1,6 @@
 #include "Guarana.hpp"
 
-Guarana::Guarana(int x, int y, World* world) : Plant(x, y, 0, "G", GUARANA, world, "Guarana")
+Guarana::Guarana(int x, int y, World* world) : Plant(x, y, 0, "U", GUARANA, world, "Guarana")
 {
 
 }

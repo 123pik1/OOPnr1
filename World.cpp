@@ -23,16 +23,13 @@ World::World(int witdh, int height)
     {
         map[i] = false;
     }
-    readWorld();
-    addOrganism(new Grass(5, 5, this));
+    openWorld();
     drawWorld();
-   
 }
-
 
 World::World()
 {
-    readWorld();
+    openWorld();
     drawWorld();
 }
 void World::mainloop()
@@ -51,37 +48,65 @@ bool World::actTurn()
             return a->getAge() > b->getAge();
         }
         return a->getInitiative() > b->getInitiative(); });
-    if (getch() == 'q')
-        return false;
+
+    
 
     for (int i = 0; i < organisms.size(); i++)
     {
         organisms[i]->action();
-        if (organisms[i]!=NULL && communicate=="")
+        if (organisms[i] != NULL && communicate == "")
         {
             communicate = organisms[i]->getCommunicate();
         }
     }
+    WINDOW* win = newwin(2, 40, 3, 0);
+    mvwprintw(win, 1, 1, "Press q to quit, s to save, l to load");
+    refresh();
+    wrefresh(win);
+    switch (getch())
+    {
+    case 'q':
+        return false;
+        break;
+    case 's':
+        saveWorld();
+        break;
+    case 'l':
+        loadWorld();
+        break;
+    default:
+        break;
+    }
+    delwin(win);
     return true;
 }
 
-void World::setFalse(int x, int y)
+bool World::setFalse(int x, int y)
 {
+    if (x < 0 || y < 0 || x >= witdh || y >= height)
+    {
+        return false;
+    }
     map[x + y * witdh] = false;
+    return true;
 }
-void World::setTrue(int x, int y)
+bool World::setTrue(int x, int y)
 {
+    if (x < 0 || y < 0 || x >= witdh || y >= height)
+    {
+        return false;
+    }
     map[x + y * witdh] = true;
+    return true;
 }
 
 void World::drawWorld()
 {
     clear();
-    WINDOW *win = newwin(height+2, witdh+2, 5, 0);
+    WINDOW *win = newwin(height + 2, witdh + 2, 5, 0);
     refresh();
     box(win, 0, 0);
-    // mvwprintw(win, 1, 1, "World");
-    WINDOW *communicateWin = newwin(5, 50, 0, 0);
+    WINDOW *communicateWin = newwin(3, 40, 0, 0);
     refresh();
     box(communicateWin, 0, 0);
     mvwprintw(communicateWin, 1, 1, communicate.c_str());
@@ -91,7 +116,10 @@ void World::drawWorld()
         org->draw(win);
     }
     wrefresh(win);
+    wrefresh(communicateWin);
     refresh();
+    delwin(win);
+    delwin(communicateWin);
 }
 
 void World::addOrganism(Organism *organism)
@@ -152,12 +180,37 @@ Organism *World::getOrganism(int x, int y)
     }
     return NULL;
 }
-
-
-
-void World::readWorld()
+void World::openWorld()
 {
-    fstream file("world.txt");
+    fstream file("world.txt", ios::in);
+    if (file.is_open())
+    {
+        readWorld(file);
+    }
+    else
+    {
+        cout << "Error while opening file" << endl;
+    }
+}
+void World::loadWorld()
+{
+    fstream file("save.txt", ios::in);
+    if (file.is_open())
+    {
+        for (int i = 0; i < organisms.size(); i++)
+        {
+            delete organisms[i];
+        }
+        organisms.clear();
+        readWorld(file);
+    }
+    else
+    {
+        cout << "Error while opening file" << endl;
+    }
+}
+void World::readWorld(fstream &file)
+{
     int x, y, strength;
     string species;
     int cooldown;
@@ -179,7 +232,7 @@ void World::readWorld()
 
             file >> x >> y >> strength >> age >> species;
             cout << "File opened" << endl;
-            cout << x << " " << y << " " << strength<<" " << age << " " << species << endl;
+            cout << x << " " << y << " " << strength << " " << age << " " << species << endl;
             if (species == "W")
             {
                 org = new Wolf(x, y, this);
@@ -222,18 +275,29 @@ void World::readWorld()
             }
             else if (species == "H")
             {
-                // if (file.good())
-                // {file >> cooldown;
-
-                // org = new Human(x, y, this, cooldown);}
-                // else
-                // {
-                //     org = new Human(x, y, this);
-                // }
+                file >> cooldown;
+                org = new Human(x, y, this, cooldown);
             }
             org->setAge(age);
             org->setStrength(strength);
             addOrganism(org);
+        }
+    }
+    else
+    {
+        cout << "Error while opening file" << endl;
+    }
+}
+
+void World::saveWorld()
+{
+    fstream file("world.txt", ios::out);
+    if (file.is_open())
+    {
+        file << witdh << " " << height << endl;
+        for (int i = 0; i < organisms.size(); i++)
+        {
+            file << organisms[i]->getSaveString() << endl;
         }
     }
     else

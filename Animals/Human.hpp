@@ -13,6 +13,8 @@ class Human:public Animal
         void useAbility();
         void abilityRegen();
         void move();
+        void collision(Organism* org);
+        void anCollision(Animal* org);
         std::string getSaveString();
         Animal* newAnimal(int x, int y);
 };

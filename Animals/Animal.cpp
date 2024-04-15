@@ -1,11 +1,14 @@
 #include "Animal.hpp"
-
+using namespace std;
 Animal::Animal(int x, int y, int strength, int initiative, char *symbol, World *world, animalTypes anSpecies, std::string name) : Organism(x, y, strength, initiative, symbol, world, anSpecies, name)
 {
+    prevX = x;
+    prevY = y;
 }
 
 void Animal::action()
 {
+    communicate = "";
     prevX = x;
     prevY = y;
     move();
@@ -14,53 +17,92 @@ void Animal::action()
 
 void Animal::moving(int dist, int direction)
 {
-    world->setFalse(x, y);
+    Organism *organism;
+    prevX = x;
+    prevY = y;
+    if(!world->setFalse(x, y))
+    {
+        returnToPos();
+        return;
+    }
     switch (direction)
     {
     case 0:
-        if (!world->isOccupied(x, y - dist))
+        if (y - dist >= 0)
         {
-            this->y -= dist;
-        }
-        else
-        {
-            this->collision(world->getOrganism(x, y - dist));
+            if (!world->isOccupied(x, y - dist))
+            {
+                this->y -= dist;
+            }
+            else
+            {
+                organism = world->getOrganism(x, y - dist);
+                if (organism)
+                {
+                    this->collision(organism);
+                };
+            }
         }
         break;
     case 1:
-        if (!world->isOccupied(x, y + dist))
+        if (y + dist < world->getHeight())
         {
-            this->y += dist;
-        }
-        else
-        {
-            this->collision(world->getOrganism(x, y + dist));
+            if (!world->isOccupied(x, y + dist))
+            {
+                this->y += dist;
+            }
+            else
+            {
+                organism = world->getOrganism(x, y + dist);
+                if (organism)
+                {
+                    this->collision(organism);
+                }
+            }
         }
         break;
     case 2:
-        if (!world->isOccupied(x - dist, y))
+        if (x - dist >= 0)
         {
-            this->x -= dist;
-        }
-        else
-        {
-            this->collision(world->getOrganism(x - dist, y));
+            if (!world->isOccupied(x - dist, y))
+            {
+                this->x -= dist;
+            }
+            else
+            {
+                organism = world->getOrganism(x- dist,y);
+                if (organism)
+                {
+                    this->collision(organism);
+                }
+            }
         }
         break;
     case 3:
-        if (!world->isOccupied(x + dist, y))
+        if (x + dist < world->getWidth())
         {
-            this->x += dist;
-        }
-        else
-        {
-            this->collision(world->getOrganism(x + dist, y));
+            if (!world->isOccupied(x + dist, y))
+            {
+                this->x += dist;
+            }
+            else
+            {
+                organism = world->getOrganism(x + dist, y);
+                if (organism)
+                {
+                    this->collision(organism);
+                }
+            }
         }
         break;
     default:
         break;
     }
-    world->setTrue(x, y);
+    if (!world->setTrue(x, y))
+    {
+        return;
+    }
+    //tu może coś poprawić?
 }
 
 void Animal::move()
@@ -95,15 +137,14 @@ void Animal::move()
             return;
         }
     }
-    //ogarnąć sprawdzanie czy nie wychodzi poza mapę, problem z zapętleniem, może ograniczyć ilość prób
-    while (dirs[direction] == false)
-    {
-        direction = rand() % 4;
-    }
+
     moving(dist, direction);
+    prevX = x;
+    prevY = y;
 }
 void Animal::fight(Organism *org)
 {
+
     if (this->getStrength() > org->getStrength())
     {
         org->die();
@@ -121,22 +162,22 @@ void Animal::anCollision(Animal *org)
     {
         int i = 0;
         bool dirs[4] = {false, false, false, false};
-        if (world->isOccupied(x, y + 1) == false && y+1<world->getHeight())
+        if (world->isOccupied(x, y + 1) == false && y + 1 < world->getHeight())
         {
             i++;
             dirs[0] = true;
         }
-        if (world->isOccupied(x, y - 1) == false && y-1>=0)
+        if (world->isOccupied(x, y - 1) == false && y - 1 >= 0)
         {
             i++;
             dirs[1] = true;
         }
-        if (world->isOccupied(x + 1, y) == false && x+1<world->getWidth())
+        if (world->isOccupied(x + 1, y) == false && x + 1 < world->getWidth())
         {
             i++;
             dirs[2] = true;
         }
-        if (world->isOccupied(x - 1, y) == false && x-1>=0)
+        if (world->isOccupied(x - 1, y) == false && x - 1 >= 0)
         {
             i++;
             dirs[3] = true;
@@ -154,7 +195,7 @@ void Animal::anCollision(Animal *org)
                 }
             }
             option++;
-           
+
             switch (option)
             {
             case 1:
@@ -176,18 +217,21 @@ void Animal::anCollision(Animal *org)
     }
     else
     {
-        org->collision(this);
-        fight(org);
+        // if (org->getX() == x && org->getY() == y)
+        org->fight(this);
     }
 }
 void Animal::collision(Organism *org)
 {
+    if (org == nullptr)
+        return;
     if (org->getType() == ANIMAL)
     {
         anCollision((Animal *)org);
     }
     else
     {
+        communicate = this->getName() + " have eaten " + org->getName();
         org->collision(this);
     }
 }

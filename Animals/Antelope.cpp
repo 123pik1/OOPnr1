@@ -40,28 +40,35 @@ void Antelope::move()
 void Antelope::retreat()
 {
     bool dirs[4] = {false};
-    if ((!world->isOccupied(x, y - 1) || world->getOrganism(x, y - 2)->getStrength() <= this->strength) && y - 2 >= 0)
+    if ((!world->isOccupied(x, y - 1) || (world->getOrganism(x,y-2)!=nullptr && world->getOrganism(x, y - 2)->getStrength() <= this->strength)) && y - 2 >= 0)
     {
         dirs[0] = true;
     }
-    if ((!world->isOccupied(x, y + 1) || world->getOrganism(x, y + 2)->getStrength() <= this->strength) && y + 2 < world->getHeight())
+    if ((!world->isOccupied(x, y + 1) || (world->getOrganism(x,y+2)!=nullptr && world->getOrganism(x, y + 2)->getStrength() <= this->strength) )&& y + 2 < world->getHeight())
     {
         dirs[1] = true;
     }
-    if ((!world->isOccupied(x - 1, y) || world->getOrganism(x - 2, y)->getStrength() <= this->strength) && x - 2 >= 0)
+    if ((!world->isOccupied(x - 1, y) || (world->getOrganism(x-2,y)!=nullptr && world->getOrganism(x - 2, y)->getStrength() <= this->strength)) && x - 2 >= 0)
     {
         dirs[2] = true;
     }
-    if ((!world->isOccupied(x + 1, y) || world->getOrganism(x + 2, y)->getStrength() <= this->strength) && x + 2 < world->getWidth())
+    if ((!world->isOccupied(x + 1, y) ||(world->getOrganism(x+2,y)!=nullptr && world->getOrganism(x + 2, y)->getStrength() <= this->strength)) && x + 2 < world->getWidth())
     {
         dirs[3] = true;
     }
-    int dir = rand() % 4;
-    while (!dirs[dir])
+    int option = rand() % 4;
+
+    while (dirs[option] == false)
     {
-        dir = rand() % 4;
+        option++;
+        if (option == 4)
+        {
+            option = 0;
+        }
     }
-    moving(1, dir);
+    option++;
+
+    moving(1, option);
 }
 
 void Antelope::collision(Organism *org)

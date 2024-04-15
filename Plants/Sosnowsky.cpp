@@ -1,6 +1,6 @@
 #include "Sosnowsky.hpp"
 
-Sosnowsky::Sosnowsky(int x, int y, World* world) : Plant(x, y, 10, "W", SOSNOWSKY_HOGWEED, world, "Sosnowsky Hogweed")
+Sosnowsky::Sosnowsky(int x, int y, World* world) : Plant(x, y, 10, "O", SOSNOWSKY_HOGWEED, world, "Sosnowsky Hogweed")
 {
 
 }
@@ -22,6 +22,33 @@ void Sosnowsky::action()
                 org->die();
         }
         
+    }
+    else if (world->isOccupied(x, y - 1) == true)
+    {
+        Organism* org = world->getOrganism(x, y - 1);
+        if (org->getType() == ANIMAL)
+        {
+            if (org->getAnSpecies()!=CYBER_SHEEP)
+                org->die();
+        }
+    }
+    else if (world->isOccupied(x + 1, y) == true)
+    {
+        Organism* org = world->getOrganism(x + 1, y);
+        if (org->getType() == ANIMAL)
+        {
+            if (org->getAnSpecies()!=CYBER_SHEEP)
+                org->die();
+        }
+    }
+    else if (world->isOccupied(x - 1, y) == true)
+    {
+        Organism* org = world->getOrganism(x - 1, y);
+        if (org->getType() == ANIMAL)
+        {
+            if (org->getAnSpecies()!=CYBER_SHEEP)
+                org->die();
+        }
     }
     Plant::action(); 
 }

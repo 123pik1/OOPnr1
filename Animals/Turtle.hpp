@@ -1,6 +1,6 @@
 #pragma once
 #include "Animal.hpp"
-
+using namespace std;
 class Turtle : public Animal
 {
 public:
@@ -21,18 +21,19 @@ public:
         }
     }
 
-    void collision(Organism *org)
+    
+    void fight(Organism *org)
     {
         Animal *anim = (Animal *)org;
-        if (org->getStrength() < 5)
+        if (anim->getStrength() < 5)
         {
-
             anim->returnToPos();
             communicate="Turtle blocked attack";
         }
         else
         {
-            Animal::collision(org);
+            Animal::fight(org);
         }
     }
+    
 };

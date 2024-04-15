@@ -90,3 +90,8 @@ string Organism::getCommunicate()
 {
     return communicate;
 }
+
+void Organism::die(Organism *org)
+{
+    world->removeOrganism(org);
+}

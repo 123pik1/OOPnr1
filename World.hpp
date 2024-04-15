@@ -25,12 +25,15 @@ public:
     World(int witdh, int height);
     void mainloop();
     void addOrganism(Organism* organism);
+    void openWorld();
     bool isOccupied(int x, int y);
     void removeOrganism(Organism* organism);
-    void setFalse(int x, int y);
-    void setTrue(int x, int y);
+    bool setFalse(int x, int y);
+    bool setTrue(int x, int y);
+    void saveWorld();
+    void loadWorld();
     Organism* getOrganism(int x, int y);
-    void readWorld();
+    void readWorld(std::fstream &file);
     int getWidth() {return witdh;}
     int getHeight() {return height;}
     ~World();

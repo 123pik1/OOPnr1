@@ -1,6 +1,6 @@
 #include "Sonchus.hpp"
 
-Sonchus::Sonchus(int x, int y,  World* world) : Plant(x, y, 0, "O", SONCHUS, world, "Sonchus")
+Sonchus::Sonchus(int x, int y,  World* world) : Plant(x, y, 0, "M", SONCHUS, world, "Sonchus")
 {
 }
 
