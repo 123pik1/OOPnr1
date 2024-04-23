@@ -46,7 +46,9 @@ string Organism::getSaveString()
 
 void Organism::die()
 {
-    world->removeOrganism(this);
+    // world->removeOrganism(this);
+    world->setFalse(x, y);
+    alive = false;
 }
 int Organism::getX()
 {
@@ -94,4 +96,12 @@ string Organism::getCommunicate()
 void Organism::die(Organism *org)
 {
     world->removeOrganism(org);
+}
+bool Organism::getAlive()
+{
+    return alive;
+}
+void Organism::aging()
+{
+    age++;
 }

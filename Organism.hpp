@@ -11,6 +11,7 @@ protected:
     int strength;
     int initiative;
     int age;
+    bool alive = true;
     char symbol[5];
     World* world;
     orgType type= NO_ORGANISM;
@@ -43,4 +44,6 @@ public:
     void draw();
     void draw(WINDOW *win);
     void die();
+    bool getAlive();
+    void aging();
 };;

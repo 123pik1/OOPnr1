@@ -49,17 +49,26 @@ bool World::actTurn()
         }
         return a->getInitiative() > b->getInitiative(); });
 
-    
-
     for (int i = 0; i < organisms.size(); i++)
     {
-        organisms[i]->action();
-        if (organisms[i] != NULL && communicate == "")
+        if (organisms[i]->getAlive())
         {
-            communicate = organisms[i]->getCommunicate();
+            organisms[i]->action();
+            if (organisms[i] != NULL && communicate == "")
+            {
+                communicate = organisms[i]->getCommunicate();
+            }
         }
     }
-    WINDOW* win = newwin(2, 40, 3, 0);
+    for (int i = 0; i < organisms.size(); i++)
+    {
+        if (organisms[i]->getAlive() == false)
+        {
+            removeOrganism(organisms[i]);
+            i--;
+        }
+    }
+    WINDOW *win = newwin(2, 40, 3, 0);
     mvwprintw(win, 1, 1, "Press q to quit, s to save, l to load");
     refresh();
     wrefresh(win);
@@ -108,6 +117,7 @@ void World::drawWorld()
     box(win, 0, 0);
     WINDOW *communicateWin = newwin(3, 40, 0, 0);
     refresh();
+    mvprintw(0, 50, "Piotr Kaczorowski 197736");
     box(communicateWin, 0, 0);
     mvwprintw(communicateWin, 1, 1, communicate.c_str());
     wrefresh(communicateWin);
@@ -147,11 +157,14 @@ World::~World()
 
 bool World::isOccupied(int x, int y)
 {
-    if (x < 0 || y < 0 || x >= witdh || y >= height)
+    for (auto org : organisms)
     {
-        return false;
+        if (org->getX() == x && org->getY() == y)
+        {
+            return true;
+        }
     }
-    return map[x + y * witdh];
+    return false;
 }
 
 void World::removeOrganism(Organism *organism)
@@ -291,7 +304,7 @@ void World::readWorld(fstream &file)
 
 void World::saveWorld()
 {
-    fstream file("world.txt", ios::out);
+    fstream file("save.txt", ios::out);
     if (file.is_open())
     {
         file << witdh << " " << height << endl;

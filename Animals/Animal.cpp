@@ -12,7 +12,7 @@ void Animal::action()
     prevX = x;
     prevY = y;
     move();
-    age++;
+    aging();
 }
 
 void Animal::moving(int dist, int direction)

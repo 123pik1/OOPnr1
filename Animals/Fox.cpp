@@ -38,5 +38,5 @@ void Fox::action()
         dir = rand()%4;
     }
     moving(1,dir);
-
+    aging();
 }

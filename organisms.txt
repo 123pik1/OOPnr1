@@ -1,0 +1,11 @@
+Sonchus - M
+Sosnowsky - O
+Guarana - U
+Belladonna - B
+Grass - G
+Antelope - A
+Fox - F
+Human - H
+Sheep - S
+Turtle - T
+Wolf - W

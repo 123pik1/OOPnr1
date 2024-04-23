@@ -44,7 +44,7 @@ void Plant::action()
         default:
             break;
         }
-        // this->communicate=this->name+" has spreaded";
+         this->communicate=this->name+" has spreaded";
     }
 }
 

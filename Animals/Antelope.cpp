@@ -1,6 +1,6 @@
 #include "Antelope.hpp"
 
-Antelope::Antelope(int x, int y, World *world) : Animal(x, y, 4, 4, "A\0", world, ANTELOPE, "Antelope")
+Antelope::Antelope(int x, int y, World *world) : Animal(x, y, 4, 4, "A", world, ANTELOPE, "Antelope")
 {
 }
 
