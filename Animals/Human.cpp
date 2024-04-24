@@ -4,7 +4,7 @@ Human::Human(int x, int y, World *world) : Animal(x, y, 5, 4, "H", world, HUMAN,
 {
 }
 
-Human::Human(int x, int y, World *world, int cooldown) : Animal(x, y, 5, 4, "H", world, HUMAN, "Human")
+Human::Human(int x, int y,  World *world, int cooldown) : Animal(x, y, 5, 4, "H", world, HUMAN, "Human")
 {
     abilityCooldown = cooldown;
 }
@@ -61,6 +61,7 @@ void Human::move()
     if (abilityCooldown == 0)
     {
         mvwprintw(win, 1, 1, "use ability?");
+        wrefresh(win);
 
         if (getch() == 'u')
         {

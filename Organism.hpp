@@ -24,7 +24,7 @@ public:
     // Organism(int x, int y, int strength, int initiative, char *symbol, orgType type, World* world);
     Organism(int x, int y, int strength, int initiative, char *symbol, World* world, plantTypes plSpecies, std::string name);
     Organism(int x, int y, int strength, int initiative, char *symbol, World* world, animalTypes anSpecies, std::string name);
-    
+    Organism(int x, int y, int strength, int initiative, char *symbol, World* world, animalTypes type, std::string name, int age);
     int getStrength();
     int getX();
     int getY();

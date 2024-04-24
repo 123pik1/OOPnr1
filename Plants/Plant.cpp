@@ -24,7 +24,7 @@ void Plant::action()
     {
         i++;
     }
-    int option = (rand() % (i+20))+1;
+    int option = (rand() % (i+40))+1;
     if (option <= i)
     {
         switch (i)

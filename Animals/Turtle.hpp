@@ -7,7 +7,9 @@ public:
     Turtle(int x, int y, World *world) : Animal(x, y, 2, 1, "T", world, TURTLE, "Turtle")
     {
     }
-
+    Turtle(int x, int y, int strength, World *world, int age) : Animal(x, y, strength, 1, "T", world, TURTLE, "Turtle", age)
+    {
+    }
     Animal *newAnimal(int x, int y)
     {
         return new Turtle(x, y, world);

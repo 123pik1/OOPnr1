@@ -6,6 +6,12 @@ Animal::Animal(int x, int y, int strength, int initiative, char *symbol, World *
     prevY = y;
 }
 
+Animal::Animal(int x, int y, int strength, int initiative, char *symbol, World *world, animalTypes anSpecies, std::string name, int age) : Organism(x, y, strength, initiative, symbol, world, anSpecies, name, age)
+{
+    prevX = x;
+    prevY = y;
+}
+
 void Animal::action()
 {
     communicate = "";
@@ -126,16 +132,9 @@ void Animal::move()
         dirs[3] = true;
     }
     int direction = rand() % 4;
-    for (int i = 1; i <= 4; i++)
+    while (dirs[direction] == false)
     {
-        if (dirs[i - 1] == true)
-        {
-            break;
-        }
-        if (i == 4)
-        {
-            return;
-        }
+        direction = (direction + 1) % 4;
     }
 
     moving(dist, direction);

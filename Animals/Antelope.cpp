@@ -4,6 +4,10 @@ Antelope::Antelope(int x, int y, World *world) : Animal(x, y, 4, 4, "A", world, 
 {
 }
 
+Antelope::Antelope(int x, int y, int strength,World *world, int age): Animal(x, y, strength, 4, "A", world, ANTELOPE, "Antelope", age)
+{
+}
+
 Animal *Antelope::newAnimal(int x, int y)
 {
     return new Antelope(x, y, world);
@@ -32,7 +36,7 @@ void Antelope::move()
     int direction = rand() % 4;
     while (dirs[direction] == false)
     {
-        direction = rand() % 4;
+        direction = (direction +1)%4;
     }
     moving(dist, direction);
 }

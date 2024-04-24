@@ -12,6 +12,11 @@ Organism::Organism(int x, int y, int strength, int initiative, char *symbol, Wor
     strcpy(this->symbol, symbol);
 }
 
+Organism::Organism(int x, int y, int strength, int initiative, char *symbol, World *world, animalTypes type, std::string name, int age): x(x), y(y), strength(strength), initiative(initiative), age(age), type(ANIMAL), plSpecies(NO_PLANT), anSpecies(type), world(world), name(name)
+{
+    strcpy(this->symbol, symbol);
+}
+
 Organism::Organism(int x, int y, int strength, int initiative, char *symbol, World* world, animalTypes anSpecies, std::string name)
     : x(x), y(y), strength(strength), initiative(initiative), age(0), type(ANIMAL), plSpecies(NO_PLANT), anSpecies(anSpecies), world(world), name(name)
 {
@@ -46,7 +51,6 @@ string Organism::getSaveString()
 
 void Organism::die()
 {
-    // world->removeOrganism(this);
     world->setFalse(x, y);
     alive = false;
 }

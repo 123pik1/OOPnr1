@@ -4,6 +4,11 @@ Fox::Fox(int x, int y, World *world):Animal(x, y, 3, 7, "F", world, FOX, "Fox")
 {
 }
 
+Fox::Fox(int x, int y, int strength, World *world, int age):Animal(x, y, strength, 7, "F", world, FOX, "Fox", age)
+{
+}
+
+
 Animal* Fox::newAnimal(int x, int y)
 {
     return new Fox(x, y, world);
@@ -35,7 +40,7 @@ void Fox::action()
     int dir = rand()%4;
     while (!dirs[dir])
     {
-        dir = rand()%4;
+        dir = (dir+1)%4;
     }
     moving(1,dir);
     aging();

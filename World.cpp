@@ -248,23 +248,23 @@ void World::readWorld(fstream &file)
             cout << x << " " << y << " " << strength << " " << age << " " << species << endl;
             if (species == "W")
             {
-                org = new Wolf(x, y, this);
+                org = new Wolf(x, y,strength, this, age);
             }
             else if (species == "S")
             {
-                org = new Sheep(x, y, this);
+                org = new Sheep(x, y,strength, this, age);
             }
             else if (species == "F")
             {
-                org = new Fox(x, y, this);
+                org = new Fox(x, y, strength, this, age);
             }
             else if (species == "T")
             {
-                org = new Turtle(x, y, this);
+                org = new Turtle(x, y,strength, this, age);
             }
             else if (species == "A")
             {
-                org = new Antelope(x, y, this);
+                org = new Antelope(x, y, strength,this, age);
             }
             else if (species == "G")
             {

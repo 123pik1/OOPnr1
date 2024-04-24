@@ -8,6 +8,7 @@ class Animal : public Organism
         int prevY;
     public:
         Animal(int x, int y, int strength, int initiative, char *symbol, World *world, animalTypes anSpecies, std::string name);
+        Animal(int x, int y, int strength, int initiative, char *symbol, World *world, animalTypes anSpecies, std::string name, int age);
         virtual void action();
         virtual void collision(Organism *org);
         virtual void move();
